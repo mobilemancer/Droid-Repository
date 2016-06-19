@@ -1,31 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DroidRepository
 {
-    public class DroidRepository: IDroidRepository
+    public class DroidRepository : IDroidRepository
     {
         private static Dictionary<string, Droid> repo { get; set; }
         private static int id;
         public DroidRepository()
         {
             repo = new Dictionary<string, Droid>();
-
-            var ig88 = new Droid
-            {
-                Id = id++,
-                Name = "IG-88",
-                ProductSeries = "IG-86",
-                Armaments = new List<string> { "Vibroblades", "Heavy pulse cannon" }
-            };
-
-            repo.Add(ig88.Name, ig88);
-
+            Seed();
         }
+
 
         public IEnumerable<Droid> GetAll()
         {
-            return repo.Values;
+            var droids = new List<Droid>();
+            foreach (var droid in repo.Values)
+            {
+                var newDroid = Droid.DeepClone(droid);
+                droids.Add(newDroid);
+            }
+            return droids;
         }
 
         public bool Delete(string name)
@@ -73,8 +71,61 @@ namespace DroidRepository
             }
             return null;
         }
-    }
 
+        public IEnumerable<Droid> GetAllFromEntryDate(DateTime entryDate)
+        {
+            return repo.Values.Where(d => d.EntryDate.CompareTo(entryDate) > 0);
+        }
+
+        public IEnumerable<Droid> GetAllTallerThan(decimal height)
+        {
+            return repo.Values.Where(d => d.Height > height);
+        }
+
+
+
+        private static void Seed()
+        {
+            var ig88 = new Droid
+            {
+                Id = id++,
+                Name = "IG-88",
+                ProductSeries = "IG-86",
+                Height = 1.96M,
+                Armaments = new List<string> {
+                    "DAS-430 Neural Inhibitor", "Heavy pulse cannon", "Poison darts",
+                    "Toxic gas dispensers", "Vibroblades"
+                }
+            };
+            repo.Add(ig88.Name, ig88);
+
+            var c3po = new Droid
+            {
+                Id = id++,
+                Name = "C-3PO",
+                ProductSeries = "3PO-series Protocol Droid",
+                Height = 1.71M,
+                Armaments = new List<string>()
+            };
+            repo.Add(c3po.Name, c3po);
+
+            var r2d2 = new Droid
+            {
+                Id = id++,
+                Name = "R2-D2",
+                ProductSeries = "R-Series",
+                Height = 0.96M,
+                Armaments = new List<string> {
+                    "Buzz saw", "Electric pike", "Drinks tray (only on sail barge)",
+                    "Fusion welder", "Scomp link", "Power recharge coupler",
+                    "Rocket boosters", "Holographic projector",
+                    "Motorized, all-terrain treads", "Retractable third leg"
+                }
+            };
+            repo.Add(r2d2.Name, r2d2);
+
+        }
+    }
 
 }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DroidRepository
 {
@@ -10,6 +11,7 @@ namespace DroidRepository
         Droid Get(int id);
         bool Put(Droid newDroid);
         Droid Update(Droid droid);
-
+        IEnumerable<Droid> GetAllFromEntryDate(DateTime entryDate);
+        IEnumerable<Droid> GetAllTallerThan(decimal height);
     }
 }
