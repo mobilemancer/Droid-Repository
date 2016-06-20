@@ -82,13 +82,21 @@ namespace DroidRepository
             return repo.Values.Where(d => d.Height > height);
         }
 
+        public Droid GetByImperialId(Guid imperialId)
+        {
+            return repo.Values.FirstOrDefault(d => d.ImperialId.Equals(imperialId));
+        }
 
 
+        /// <summary>
+        /// Seed the database with a few initial droids
+        /// </summary>
         private static void Seed()
         {
             var ig88 = new Droid
             {
                 Id = id++,
+                ImperialId = Guid.Parse("0B450FDD-F484-423B-8685-4193E9FA583D"),
                 Name = "IG-88",
                 ProductSeries = "IG-86",
                 Height = 1.96M,
@@ -125,6 +133,7 @@ namespace DroidRepository
             repo.Add(r2d2.Name, r2d2);
 
         }
+
     }
 
 }

@@ -13,5 +13,6 @@ namespace DroidRepository
         Droid Update(Droid droid);
         IEnumerable<Droid> GetAllFromEntryDate(DateTime entryDate);
         IEnumerable<Droid> GetAllTallerThan(decimal height);
+        Droid GetByImperialId(Guid imperialId);
     }
 }
