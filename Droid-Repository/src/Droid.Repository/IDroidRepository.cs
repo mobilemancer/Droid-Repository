@@ -5,7 +5,7 @@ namespace DroidRepository
 {
     public interface IDroidRepository
     {
-        bool Delete(string name);
+        Droid Delete(string name);
         IEnumerable<Droid> GetAll();
         Droid Get(string name);
         Droid Get(int id);
@@ -14,5 +14,6 @@ namespace DroidRepository
         IEnumerable<Droid> GetAllFromEntryDate(DateTime entryDate);
         IEnumerable<Droid> GetAllTallerThan(decimal height);
         Droid GetByImperialId(Guid imperialId);
+        IEnumerable<Droid> GetByCreditBalance(long creditBalance);
     }
 }

@@ -6,9 +6,10 @@ namespace DroidRepository
     public class Droid
     {
         public int Id { get; set; }
-        public Guid ImperialId { get; set; }
+        public Guid ImperialContractId { get; set; }
         public DateTime EntryDate { get; } = DateTime.UtcNow;
         public string Name { get; set; }
+        public long CreditBalance { get; set; }
         public string ProductSeries { get; set; }
         public decimal Height { get; set; }
         public IEnumerable<string> Armaments { get; set; }

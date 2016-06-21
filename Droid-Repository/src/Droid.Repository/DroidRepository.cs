@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,11 +7,11 @@ namespace DroidRepository
 {
     public class DroidRepository : IDroidRepository
     {
-        private static Dictionary<string, Droid> repo { get; set; }
+        private static ConcurrentDictionary<string, Droid> repo { get; set; }
         private static int id;
         public DroidRepository()
         {
-            repo = new Dictionary<string, Droid>();
+            repo = new ConcurrentDictionary<string, Droid>();
             Seed();
         }
 
@@ -26,9 +27,11 @@ namespace DroidRepository
             return droids;
         }
 
-        public bool Delete(string name)
+        public Droid Delete(string name)
         {
-            return repo.Remove(name);
+            Droid droid;
+            repo.TryRemove(name, out droid);
+            return droid;
         }
 
         public Droid Get(string name)
@@ -57,7 +60,7 @@ namespace DroidRepository
             }
 
             newDroid.Id = id++;
-            repo.Add(newDroid.Name, newDroid);
+            repo.TryAdd(newDroid.Name, newDroid);
 
             return true;
         }
@@ -84,8 +87,14 @@ namespace DroidRepository
 
         public Droid GetByImperialId(Guid imperialId)
         {
-            return repo.Values.FirstOrDefault(d => d.ImperialId.Equals(imperialId));
+            return repo.Values.FirstOrDefault(d => d.ImperialContractId.Equals(imperialId));
         }
+
+        public IEnumerable<Droid> GetByCreditBalance(long creditBalance)
+        {
+            return repo.Values.Where(d => d.CreditBalance > creditBalance);
+        }
+
 
 
         /// <summary>
@@ -96,8 +105,9 @@ namespace DroidRepository
             var ig88 = new Droid
             {
                 Id = id++,
-                ImperialId = Guid.Parse("0B450FDD-F484-423B-8685-4193E9FA583D"),
+                ImperialContractId = Guid.Parse("0B450FDD-F484-423B-8685-4193E9FA583D"),
                 Name = "IG-88",
+                CreditBalance = 4611686018427387903,
                 ProductSeries = "IG-86",
                 Height = 1.96M,
                 Armaments = new List<string> {
@@ -105,7 +115,7 @@ namespace DroidRepository
                     "Toxic gas dispensers", "Vibroblades"
                 }
             };
-            repo.Add(ig88.Name, ig88);
+            repo.TryAdd(ig88.Name, ig88);
 
             var c3po = new Droid
             {
@@ -115,7 +125,7 @@ namespace DroidRepository
                 Height = 1.71M,
                 Armaments = new List<string>()
             };
-            repo.Add(c3po.Name, c3po);
+            repo.TryAdd(c3po.Name, c3po);
 
             var r2d2 = new Droid
             {
@@ -130,10 +140,9 @@ namespace DroidRepository
                     "Motorized, all-terrain treads", "Retractable third leg"
                 }
             };
-            repo.Add(r2d2.Name, r2d2);
+            repo.TryAdd(r2d2.Name, r2d2);
 
         }
-
     }
 
 }
