@@ -17,8 +17,11 @@ namespace DroidRepository
         {
             var newDroid = new Droid();
             newDroid.Id = oldDroid.Id;
+            newDroid.ImperialContractId = oldDroid.ImperialContractId;
             newDroid.Name = oldDroid.Name;
+            newDroid.CreditBalance = oldDroid.CreditBalance;
             newDroid.ProductSeries = oldDroid.ProductSeries;
+            newDroid.Height = oldDroid.Height;
             newDroid.Armaments = new List<string>(oldDroid.Armaments);
             return newDroid;
 
