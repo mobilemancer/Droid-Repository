@@ -13,6 +13,7 @@ namespace DroidRepository
         public string ProductSeries { get; set; }
         public decimal Height { get; set; }
         public IEnumerable<string> Armaments { get; set; }
+        public IEnumerable<string> Equipment { get; set; }
         public static Droid DeepClone(Droid oldDroid)
         {
             var newDroid = new Droid();
@@ -20,6 +21,7 @@ namespace DroidRepository
             newDroid.Name = oldDroid.Name;
             newDroid.ProductSeries = oldDroid.ProductSeries;
             newDroid.Armaments = new List<string>(oldDroid.Armaments);
+            newDroid.Equipment = new List<string>(oldDroid.Equipment);
             return newDroid;
 
         }

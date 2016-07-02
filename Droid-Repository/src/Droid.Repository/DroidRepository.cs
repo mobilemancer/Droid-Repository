@@ -113,7 +113,8 @@ namespace DroidRepository
                 Armaments = new List<string> {
                     "DAS-430 Neural Inhibitor", "Heavy pulse cannon", "Poison darts",
                     "Toxic gas dispensers", "Vibroblades"
-                }
+                },
+                Equipment = new List<string>()
             };
             repo.TryAdd(ig88.Name, ig88);
 
@@ -123,7 +124,11 @@ namespace DroidRepository
                 Name = "C-3PO",
                 ProductSeries = "3PO-series Protocol Droid",
                 Height = 1.71M,
-                Armaments = new List<string>()
+                Armaments = new List<string>(),
+                Equipment = new List<string>
+                {
+                    "TranLang III communication module"
+                }
             };
             repo.TryAdd(c3po.Name, c3po);
 
@@ -134,10 +139,16 @@ namespace DroidRepository
                 ProductSeries = "R-Series",
                 Height = 0.96M,
                 Armaments = new List<string> {
-                    "Buzz saw", "Electric pike", "Drinks tray (only on sail barge)",
-                    "Fusion welder", "Scomp link", "Power recharge coupler",
-                    "Rocket boosters", "Holographic projector",
-                    "Motorized, all-terrain treads", "Retractable third leg"
+                    "Buzz saw", "Electric pike"
+                },
+                Equipment = new List<string>
+                {
+                    "Drinks tray (only on sail barge)", "Fusion welder",
+                    "Com link", "Power recharge coupler",
+                    "Rocket boosters", "Holographic projector/recorder",
+                    "Motorized, all-terrain treads", "Retractable third leg",
+                    "Periscope", "Fire extinguisher", "Hidden lightsaber compartment with ejector",
+                    "Data probe", "Life-form scanner", "Utility arm"
                 }
             };
             repo.TryAdd(r2d2.Name, r2d2);
