@@ -69,6 +69,7 @@ namespace DroidRepository
         {
             if (repo.ContainsKey(droid.Name))
             {
+                droid.Id = repo[droid.Name].Id;
                 repo[droid.Name] = droid;
                 return droid;
             }
