@@ -23,8 +23,22 @@ namespace DroidRepository
             newDroid.CreditBalance = oldDroid.CreditBalance;
             newDroid.ProductSeries = oldDroid.ProductSeries;
             newDroid.Height = oldDroid.Height;
-            newDroid.Armaments = new List<string>(oldDroid.Armaments);
-            newDroid.Equipment = new List<string>(oldDroid.Equipment);
+            if (oldDroid.Armaments != null)
+            {
+                newDroid.Armaments = new List<string>(oldDroid.Armaments);
+            }
+            else
+            {
+                newDroid.Armaments = new List<string>();
+            }
+            if (oldDroid.Equipment != null)
+            {
+                newDroid.Equipment = new List<string>(oldDroid.Equipment);
+            }
+            else
+            {
+                newDroid.Equipment = new List<string>();
+            }
             return newDroid;
 
         }

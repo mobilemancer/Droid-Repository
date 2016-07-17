@@ -24,7 +24,7 @@ namespace DroidRepository
                 var newDroid = Droid.DeepClone(droid);
                 droids.Add(newDroid);
             }
-            return droids;
+            return droids.OrderBy(d => d.Id);
         }
 
         public Droid Delete(string name)
