@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DroidRepository
 {
@@ -40,8 +41,51 @@ namespace DroidRepository
                 newDroid.Equipment = new List<string>();
             }
             return newDroid;
-
         }
 
+        public void Update(Droid droid)
+        {
+            if (droid.ImperialContractId != Guid.Empty)
+            {
+                ImperialContractId = droid.ImperialContractId;
+            }
+
+            if (droid.CreditBalance != 0)
+            {
+                CreditBalance = droid.CreditBalance;
+            }
+
+            if (droid.ProductSeries != null)
+            {
+                ProductSeries = droid.ProductSeries;
+            }
+
+            if (droid.Height != 0)
+            {
+                Height = droid.Height;
+            }
+
+            if (droid.Armaments != null)
+            {
+                foreach (var armament in droid.Armaments)
+                {
+                    if (!Armaments.Contains(armament))
+                    {
+                        ((List<string>)Armaments).Add(armament);
+                    }
+                }
+            }
+
+            if (droid.Equipment != null)
+            {
+                foreach (var equipment in droid.Equipment)
+                {
+                    if (!Equipment.Contains(equipment))
+                    {
+                        ((List<string>)Equipment).Add(equipment);
+                    }
+                }
+            }
+        }
     }
 }

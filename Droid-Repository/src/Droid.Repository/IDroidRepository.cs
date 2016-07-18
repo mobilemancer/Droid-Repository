@@ -11,6 +11,7 @@ namespace DroidRepository
         Droid Get(int id);
         bool Put(Droid newDroid);
         Droid Update(Droid droid);
+        Droid UpdatePartial(string name, Droid droid);
         IEnumerable<Droid> GetAllFromEntryDate(DateTime entryDate);
         IEnumerable<Droid> GetAllTallerThan(decimal height);
         Droid GetByImperialId(Guid imperialId);

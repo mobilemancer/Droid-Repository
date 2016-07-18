@@ -76,6 +76,16 @@ namespace DroidRepository
             return null;
         }
 
+        public Droid UpdatePartial(string name, Droid droid)
+        {
+            if (repo.ContainsKey(name))
+            {
+                repo[name].Update(droid);
+                return repo[name];
+            }
+            return null;
+        }
+
         public IEnumerable<Droid> GetAllFromEntryDate(DateTime entryDate)
         {
             return repo.Values.Where(d => d.EntryDate.CompareTo(entryDate) > 0);
